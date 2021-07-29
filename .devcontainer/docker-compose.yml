@@ -1,0 +1,40 @@
+version: '2'
+services:
+  web:
+    image: "odoo-addons-dev:14.0"
+    build:
+      context: "."
+      dockerfile: odoo/Dockerfile
+      args:
+        ODOO_VERSION: "14.0"
+        SUPPORT_RTLCSS: "true"
+        # Update 'VARIANT' to pick a Python version: 3, 3.6, 3.7, 3.8, 3.9
+        VARIANT: "3"
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./odoo/.vscode:/opt/odoo/.vscode:cached
+      - ..:/opt/odoo/custom_addons:cached
+      - odoo-data:/opt/odoo/data
+      - user-home:/home/vscode
+    env_file:
+      - ./odoo/odoo.env
+    depends_on: 
+      - db
+    tty: true
+    #command: bash
+    entrypoint: bash
+  db:
+    image: postgres:11
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+volumes:
+  odoo-data:
+  user-home:
+  postgres-data:
