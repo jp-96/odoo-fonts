@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <template id="_assets_backend_helpers" inherit_id="web._assets_backend_helpers">
+            <xpath expr="//link[last()]" position="after">
+                <link rel="stylesheet" type="text/scss" href="/l10n_ja_ipafonts/static/src/scss/var_font_family_sans_serif.scss"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>
