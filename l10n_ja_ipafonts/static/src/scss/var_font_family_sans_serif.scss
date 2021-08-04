@@ -1,0 +1,5 @@
+// Fonts
+//
+// Insert 'IPAmjMincho' at the top of the variable, $font-family-sans-serif.
+
+$font-family-sans-serif: join(IPAmjMincho, $font-family-sans-serif, $separator: comma);
